@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+body {
+  height: 100%;
+  color: #ffffff; }
+
+p {
+  color: #000; }
+h1{
+	background: url('https://cdn.pocket-lint.com/r/s/1200x630/assets/images/152137-laptops-review-apple-macbook-pro-2020-review-image1-pbzm4ejvvs.jpg');
+	height: 50px;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background: url('https://cdn.pocket-lint.com/r/s/1200x630/assets/images/152137-laptops-review-apple-macbook-pro-2020-review-image1-pbzm4ejvvs.jpg') red no-repeat top right;
+}
+/*# sourceMappingURL=style.css.map */

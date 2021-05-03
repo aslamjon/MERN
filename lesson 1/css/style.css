@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+body {
+  background: linear-gradient(to bottom, #2b32b2 0%, #1488cc 100%);
+  background-repeat: no-repeat;
+  height: 100%;
+  color: #ffffff; }
+
+.title {
+  font-size: 26px;
+  padding: 20px;
+  padding-bottom: 0; }
+  .title div {
+    font-size: 18px; }
+
+.img img {
+  height: 200px; }
+
+.second {
+  font-size: 18px; }
+  .second div {
+    font-size: 100px;
+    position: relative;
+    margin-top: -20px; }
+    .second div span {
+      font-size: 25px;
+      position: absolute;
+      top: 20px; }
+  .second aside {
+    margin-top: -15px; }
+
+.main {
+  display: flex;
+  justify-content: space-between; }
+  .main .section-1, .main .section-2 {
+    width: 49%; }
+  .main .section-2 {
+    border-left: 1px solid #d8d8d8; }
+
+.bor {
+  border-right: 1px solid #d8d8d8; }
+
+.aslamjon {
+  font-size: 24px;
+  position: relative; }
+  .aslamjon span {
+    font-size: 14px;
+    position: absolute; }
+    .aslamjon span:last-child {
+      font-size: 16px;
+      display: block;
+      color: #bdbdbd; }
+
+.asos, .asos2 {
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  width: 100%; }
+
+.vremeni .titlee {
+  font-size: 22px;
+  color: #acacac;
+  margin: 15px 0; }
+.vremeni .time {
+  display: flex;
+  justify-content: space-between; }
+  .vremeni .time .box {
+    background: rgba(0, 0, 0, 0.15);
+    padding: 15px 30px;
+    text-align: center;
+    border-radius: 5px; }
+    .vremeni .time .box .houre, .vremeni .time .box .gradus {
+      font-size: 20px; }
+
+@media (max-width: 991px) {
+  .vremeni {
+    display: none; } }
+@media (max-width: 767px) {
+  .bor {
+    border: none; }
+
+  .main {
+    display: block; }
+    .main .section-1, .main .section-2 {
+      width: 100%;
+      border: none; } }
+.day5 {
+  margin-top: 20px; }
+  .day5 .titlee {
+    font-size: 22px;
+    color: #acacac;
+    margin: 15px 0; }
+  .day5 .boxes {
+    display: flex;
+    background: rgba(0, 0, 0, 0.15);
+    justify-content: space-around;
+    border-radius: 5px;
+    padding: 15px 0;
+    margin-bottom: 10px; }
+    .day5 .boxes .box aside span {
+      font-size: 20px;
+      display: block; }
+      .day5 .boxes .box aside span:last-child {
+        font-size: 18px;
+        color: #cacaca; }
+
+@media (max-width: 400px) {
+  .img img {
+    height: 180px; }
+
+  .second div {
+    font-size: 85px; }
+
+  .day5 .boxes .box aside span {
+    font-size: 17px; }
+    .day5 .boxes .box aside span:last-child {
+      font-size: 15px; } }
+
+/*# sourceMappingURL=style.css.map */
