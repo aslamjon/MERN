@@ -1,7 +1,11 @@
-let num = 987;
-let first =  Math.floor(num / 100) //?
-let second = Math.floor(((num / 100) - first) * 10) //?
-let min = '' + first + second; //?
-let third = Math.round(((num / 10) - min) * 10) //?
+let num = 92857;
 
-console.log(`${third}${second}${first}`);
+sum = '';
+DefaultNum = num;
+count = 0;
+while(num > 0) {
+    sum += num%10 //?
+    num = Math.floor(num/10) //?
+    count++;
+}
+console.log(`Input: ${DefaultNum} \nOutput: ${sum} \n${count} xonali son`);
