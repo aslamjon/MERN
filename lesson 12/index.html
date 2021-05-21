@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Lesson 12</title>
+</head>
+<body>
+	<p id="demo">Hello World</p>
+	<button id="" onclick="action()">Click</button>
+	<button id="" onclick="ignore()">Ignore</button>
+
+	<script type="text/javascript">
+		document.getElementById('demo').innerHTML = "Salom Dunyo";
+		let myTimeout;
+		function myFunction() {
+			alert('Something')
+		}
+		function action() {
+			myTimeout = setTimeout(myFunction, 3000);
+		}
+
+		function ignore() {
+			clearTimeout(myTimeout);
+		}
+	</script>
+</body>
+</html>

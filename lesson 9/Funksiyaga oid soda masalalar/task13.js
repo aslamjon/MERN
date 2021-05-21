@@ -1,0 +1,24 @@
+function task(a, b, c){
+    let max;
+    let min;
+    // max
+    if (a > b && a > c) max = a;
+    else if (c > a && c > b) max = c;
+    else if (b > a && b > c) max = b;
+    // min
+    if (a < b && a < c) min = a;
+    else if (b < a && b < c) min = b;
+    else if (c < a && c < b) min = c;
+    // center
+    let swap;
+    if (max === b) {
+        if (a > c) swap = a;
+        else swap = c;
+        b = swap;
+    }
+
+    a = max;
+    c = min;
+    return `${a}, ${b}, ${c}`; 
+}
+console.log(task(5, 2, 1));

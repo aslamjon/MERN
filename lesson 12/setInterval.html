@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SetInterval</title>
+</head>
+<body>
+	<p id="clock"></p>
+	<button>Stop</button>
+
+	<script type="text/javascript">
+		function date() {
+			let d = new Date();
+			document.getElementById('clock').innerHTML = d.toLocaleTimeString();
+		}
+		let myInterval = setInterval(date, 1000);
+		function clear() {
+			clearInterval(myInterval);
+		}
+		document.querySelector('button').onclick = function() {
+			clear();
+		}
+
+	
+	</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		#thing {
+			width: 70px;
+			height: 70px;
+			background: yellow;
+			border: 1px solid red;
+		}
+	</style>
+</head>
+<body>
+	<div id="thing"></div>
+
+	<p id="demo"></p>
+
+	<script type="text/javascript">
+		var deom = document.querySelector('#deom');
+
+		var theThing = document.querySelector("#thing");
+		var container = document.querySelector("body");
+
+		let upOrDonw = false; 
+
+		container.addEventListener('mousedown', function(e) {
+			upOrDonw = true;
+			
+			
+
+
+		} , false); 
+
+		container.addEventListener('mouseup', function(e) {
+			upOrDonw = false;
+
+		} , false);
+
+		container.addEventListener('mousemove', function(e) {
+
+			demo.innerHTML = `
+			Mouse coordinate => x : ${e.offsetX}  y : ${e.offsetY} <br>
+			Client coordinate => x : ${e.clientX}  y : ${e.clientY} <br>
+			Box Width : ${theThing.offsetWidth} <br>
+			Box Height : ${theThing.offsetHeight}
+
+			`;
+			
+
+			if ((e.clientX == theThing.offsetWidth) || (e.clientX + 1 == theThing.offsetWidth) || (e.clientX - 1 == theThing.offsetWidth)) {
+					theThing.style.cursor = 'e-resize';
+					
+
+			} else if ((e.clientY == theThing.offsetHeight) || (e.clientY + 1 == theThing.offsetHeight) || (e.clientY - 1 == theThing.offsetHeight)) {
+				theThing.style.cursor = 'n-resize';		
+			}
+			else {
+				theThing.style.cursor = 'default';
+			}
+
+			if (upOrDonw) {
+
+				var xPosition = e.clientX ;
+				var yPosition = e.clientY ;
+				
+				demo.innerHTML = `X : ${xPosition}  Y : ${yPosition}`;
+
+				if (e.clientY + 5 < theThing.offsetHeight) 
+					theThing.style.width = e.clientX + 'px';
+				
+				else if (e.clientX + 5 < theThing.offsetWidth)
+					theThing.style.height = e.clientY + 'px';
+				
+
+			}
+
+		});
+
+
+	</script>
+</body>
+</html>

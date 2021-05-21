@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Animate</title>
+	<style>
+		#container {
+			width: 400px;
+			height: 400px;
+			position: relative;
+			background: yellow;
+		}
+		#animate {
+			width: 50px;
+			height: 50px;
+			position: absolute;
+			background: red;
+			right: 0;
+		}
+		button {
+			margin: 20px 0 24px; 
+		}
+	</style>
+</head>
+<body>
+	<!-- <button onclick="move()">Click</button>
+	<div id="container">
+		<div id="animate"></div>
+	</div> -->
+
+	Name: <input type="text" onchange='toUpperCasee(this)'>
+	<!-- onchange, onkeyup -->
+
+	<script type="text/javascript">
+		let elem = document.getElementById('animate');
+		function move() {
+			let pos = 0;
+			setInterval(frame, 5)
+			function frame() {
+				if (pos === 350) {
+					clearInterval();
+					elem.style.transform = `rotate(0deg)`; 
+				} else {
+					pos++;
+					elem.style.top = pos + 'px'; 
+					elem.style.right = pos + 'px';
+					elem.style.transform = `rotate(${pos}deg)`; 
+				}
+			}
+		}
+
+		function toUpperCasee(x) {
+			x.value = x.value.toUpperCase();
+		}
+		
+	</script>
+</body>
+</html>
