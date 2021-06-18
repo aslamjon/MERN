@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../../lesson 1/css/normalize.css">
+	<link rel="stylesheet" href="../../lesson 1/css/bootstrap.css">
+	<link rel="stylesheet" href="../../lesson 1/css/owl.carousel.css">
+	<link rel="stylesheet" href="../../lesson 1/css/highcharts.css">
+	<link rel="stylesheet" href="../../lesson 1/css/privet_bootstrap.css">
+	<title>Document</title>
+	<style>
+		.img {
+			height: 250px;
+			overflow: hidden;
+		}
+		/*.img img {
+			height:  100%;
+		}*/
+		.card-title{
+    		font-size: 1.20rem;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+
+			
+
+		</div>
+		
+	</div>
+	
+
+
+	<script src="../../lesson 1/js/jquery-3.5.1.slim.min.js"></script>
+	<script src="../../lesson 1/js/jQuery.min.js"></script>
+	<script src="../../lesson 1/js/popper.min.js"></script>
+	<script src="../../lesson 1/js/bootstrap.min.js"></script>
+	<script src="../../lesson 1/js/owl.carousel.js"></script>
+	<script>
+		let photos = [
+		"https://www.mantruckandbus.com/fileadmin/_processed_/d/0/csm_interview-haas-teaserbild-kopie_9501124c45.jpg", 
+		"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMS0ixydeVrUjhsnnFhSz-43KtyKJwqekQgEH7NsJYfac6ZGJMvFq2lg98zhOqLxgsEo4&usqp=CAU", 
+		"https://cdn.shopify.com/s/files/1/0045/5104/9304/t/27/assets/AC_ECOM_SITE_2020_REFRESH_1_INDEX_M2_THUMBS-V2-1.jpg?v=8913815134086573859", 
+		"https://thumbs.dreamstime.com/z/portrait-young-handsome-man-white-shirt-outdoor-portrait-young-handsome-man-white-shirt-outdoor-nice-appearance-131934608.jpg", 
+		"https://static.wikia.nocookie.net/althistory/images/7/71/Robert_Jr..jpg/revision/latest/scale-to-width-down/400?cb=20140424231524", 
+		"https://i.pinimg.com/originals/93/8e/96/938e96c65d218c5e54ec7bd7546c76a8.jpg", 
+		"https://i.guim.co.uk/img/media/2eec90fd3684079c448379383ec225d1d688c38a/0_359_5976_3584/master/5976.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6bc4b6f3defebfa0a287f2b2593cf83a", 
+		"https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F20%2F2020%2F11%2F13%2Fdwayne-johnson.jpg", 
+		"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80", 
+		"https://bsos.umd.edu/sites/bsos.umd.edu/files/brock_mcgoff_3.jpg"];
+		let row = document.querySelector('.row');
+
+		let users = fetch("https://jsonplaceholder.typicode.com/users");
+
+		users
+			.then(respons => respons.json())
+			.then(json => {
+				console.log(json)
+				json.forEach((val, index) => {
+					row.innerHTML += `
+						<div class="col-md-3 mt-3">
+							<div class="card">
+								<div class="img">
+									<img src="${photos[index]}" class="card-img-top" alt="...">
+								</div>
+								<div class="card-body">
+									<h5 class="card-title">${val.name}</h5>
+									<p class="card-text">${val.company.name}</p>
+									<a href="#" class="btn btn-dark">Contact</a>
+								</div>
+							</div>
+						</div>`;
+					// console.log(val.name)
+					// console.log(val.company.name)
+					// console.log(val.email)
+				})
+			})
+		
+
+
+	</script>
+
+</body>
+</html>
