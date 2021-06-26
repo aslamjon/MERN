@@ -3,7 +3,10 @@ const http = require('http');
 const fs = require('fs');
 const { resolve } = require('path');
 
+
 const products = require('./data/data.json')
+let onlyOne = true;
+let countId;
 const server = http.createServer(function(req, res) {
     if (req.url === '/products' && req.method === 'GET') {
         const productPromise = new Promise((resolve, reject) => {
@@ -26,13 +29,19 @@ const server = http.createServer(function(req, res) {
         })
         req.on('end', function() {
             let temp;
-            fs.readFile('lesson 25/data/data.json','utf8', function(err, data) {
+            fs.readFile('data/data.json','utf8', function(err, data) {
                 if (err) console.log('error',err);
                 else {
                     temp = JSON.parse(data);
-                    temp.push(JSON.parse(body));
-                    console.log(temp);
-                    fs.writeFile('lesson 25/data/data.json', JSON.stringify(temp, null, 4), function(err){console.log(err)});
+                    if (onlyOne) {
+                        countId = temp[temp.length-1].id;
+                        onlyOne = false
+                    }
+                    countId++;
+                    body = JSON.parse(body);
+                    body.id = String(countId);
+                    temp.push(body);
+                    fs.writeFile('data/data.json', JSON.stringify(temp, null, 4), function(err){console.log(err)});
                 }
             });
         })
