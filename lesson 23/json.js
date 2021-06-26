@@ -6,6 +6,7 @@ let person = {
 }
 
 // console.log(JSON.stringify(person));
+// JSON.stringify(person)  -> Obj ni jsonga aylantirib beradi
 console.log(JSON.stringify(person, null, 2)); // json ni chiroyli qilib beradi
 
 let fs = require('fs');
