@@ -1,7 +1,6 @@
 const http = require('http');
 const fs = require('fs');
 const todolist = require('./todolist.json');
-const { count } = require('console');
 
 let onlyOne = true;
 let countId = 0;
@@ -43,7 +42,7 @@ const server = http.createServer(function(req, res) {
                     if (err) console.log(err);
                     else {
                         res.writeHead(200, {"Content-type": "text/json"});
-                        res.write(JSON.stringify({ massege: "Data have updated" }));
+                        res.write(JSON.stringify({ massege: "Data have been updated" }));
                         res.end();
                     }
                 })
@@ -59,8 +58,11 @@ const server = http.createServer(function(req, res) {
         if (foundData) {
             res.writeHead(200, {"Content-type":'text/json'});
             res.write(JSON.stringify(foundData));
-            res.end();
+        } else {
+            res.writeHead(200, {"Content-type":'text/json'});
+            res.write(JSON.stringify({ message: 'data not found' }));
         }
+        res.end();
     } else if (req.url == '/' && req.method === 'PUT') {
         // Create Task
         const promise = new Promise((resolve, reject) => {

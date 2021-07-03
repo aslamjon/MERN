@@ -9,12 +9,30 @@
         "id": "5",
         "name": "Logitech G-Series Gaming Mouse",
         "description": "Get a better handle on your games with this Logitech LIGHTSYNC gaming mouse. The six programmable buttons allow customization for a smooth playing experience",
-        "price": 49.99
+        "price": 1600
     },
     {
         "id": "6",
         "name": "Macbook Pro 15",
         "description": "Apple Macbook Pro 15",
         "price": 1500
+    },
+    {
+        "id": "7",
+        "name": "Macbook Pro 10",
+        "description": "Apple Macbook Pro 15",
+        "price": 1500
+    },
+    {
+        "id": "8",
+        "name": "Macbook Pro 16",
+        "description": "Apple Macbook Pro 15",
+        "price": 2000
+    },
+    {
+        "id": "9",
+        "name": "Macbook Pro 16",
+        "description": "Apple Macbook Pro 15",
+        "price": 2500
     }
 ]
