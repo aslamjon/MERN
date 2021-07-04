@@ -1,7 +1,6 @@
 const http = require("http");
 const fs = require("fs");
 const todolist = require("./todolist.json");
-const { count } = require("console");
 
 let onlyOne = true;
 let countId = 0;
@@ -49,7 +48,9 @@ const server = http
                 if (err) console.log(err);
                 else {
                   res.writeHead(200, { "Content-type": "text/json" });
-                  res.write(JSON.stringify({ massege: "Data have updated" }));
+                  res.write(
+                    JSON.stringify({ massege: "Data have been updated" })
+                  );
                   res.end();
                 }
               }
@@ -61,6 +62,51 @@ const server = http
         res.write(JSON.stringify({ massege: "Data not found" }));
         res.end();
       }
+    } else if (req.url.match(/\w+/) && req.method === "GET") {
+      let foundData = find();
+      if (foundData) {
+        res.writeHead(200, { "Content-type": "text/json" });
+        res.write(JSON.stringify(foundData));
+      } else {
+        res.writeHead(200, { "Content-type": "text/json" });
+        res.write(JSON.stringify({ message: "data not found" }));
+      }
+      res.end();
+    } else if (req.url == "/" && req.method === "PUT") {
+      // Create Task
+      const promise = new Promise((resolve, reject) => {
+        let body = "";
+        req.on("data", (chunk) => (body += chunk));
+        req.on("end", () => resolve(body));
+        req.on("error", (err) => {
+          console.log(err);
+          reject("Error");
+        });
+      });
+      promise
+        .then((data) => {
+          let update = JSON.parse(data);
+          todolist[indexFindElem].task = update.task;
+          todolist[indexFindElem].done = update.done;
+          fs.writeFile(
+            "todolist.json",
+            JSON.stringify(todolist, null, 4),
+            "utf8",
+            (err) => {
+              if (err) console.log(err);
+              else {
+                res.writeHead(200, { "Content-type": "text/json" });
+                res.write(JSON.stringify({ massege: "Data have updated" }));
+                res.end();
+              }
+            }
+          );
+        })
+        .catch((err) => {
+          res.writeHead(200, { "Content-type": "text/json" });
+          res.write(JSON.stringify({ massege: "Data haven't been added" }));
+          res.end();
+        });
     } else if (req.url.match(/\w+/) && req.method === "GET") {
       let foundData = find();
       if (foundData) {
