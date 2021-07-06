@@ -32,10 +32,4 @@ const server = http.createServer(function(req, res) {
     Delete
 */ 
 
-// postman bilan json yuboramiz va ma'lumotni update qiladi agar malumot bo'lmasa error beradi
-// to-do listni server bilan yaratish 
-
-// let product = {
-//  id: uuid.v4() // id generator
-// }
 server.listen(3000, () => console.log("Server is running"));
