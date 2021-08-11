@@ -4,9 +4,9 @@ const fs = require('fs');
 const { resolve } = require('path');
 
 const products = require('./data/data.json')
-const {getAllProducts, getElementById, createPost, deleteElement, updateProduct} = require('./controllers/productController');
+const { getAllProducts, getElementById, createPost, deleteElement, updateProduct } = require('./controllers/productController');
 
-const server = http.createServer(function(req, res) {
+const server = http.createServer( function (req, res) {
     if (req.url === '/products' && req.method === 'GET') {
         getAllProducts(req, res);
     } else if (req.url.match(/\/products\/\w+/) && req.method === 'GET') {
@@ -30,6 +30,6 @@ const server = http.createServer(function(req, res) {
     Read
     Update
     Delete
-*/ 
+*/
 
 server.listen(3000, () => console.log("Server is running"));

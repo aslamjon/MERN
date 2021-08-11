@@ -1,63 +1,55 @@
 const fs = require('fs');
 const products = require('../data/data.json')
-
-const {getData, writeToFile} = require('../utils/utils');
+const {getProducts, getProductById, writeToFile, deleteById} = require('../models/productModel');
+const {getData} = require('../utils/utils');
 
 let onlyOne = true;
 let countId;
 async function getAllProducts(req, res) {
-    const productPromise = new Promise((resolve, reject) => {
-        resolve(products)
-    })
-
-    productPromise.then((data) => {
+    try {
+        const products = await getProducts()
         res.writeHead(200, { "Content-type": "text/json" });
-        res.write(JSON.stringify(data));
+        res.write(JSON.stringify(products));
         res.end();
-    }).catch((error) => {
+    }
+    catch(error) {
         res.writeHead(404, { "Content-type": "text/json" });
         res.write(JSON.stringify(error));
         res.end();
-    })
+    }
 }
 
 async function getElementById(req, res, id) {
-    let needfulData;
-    fs.readFile('data/data.json', 'utf8', function (err, data) {
-        if (err) console.log(err);
-        else {
-            needfulData = products.find((product) => product.id == id);
-            if (!needfulData) {
-                res.writeHead(404, { "Content-type": "text/json" });
-                res.write(JSON.stringify({ message: "Product not found" }));
-            } else {
-                res.writeHead(200, { "Content-type": "text/json" });
-                res.write(JSON.stringify(needfulData));
-            }
-            res.end();
+    try {
+        needfulData = await getProductById(id);
+        if (!needfulData) {
+            res.writeHead(404, { "Content-type": "text/json" });
+            res.write(JSON.stringify({ message: "Product not found" }));
+        } else {
+            res.writeHead(200, { "Content-type": "text/json" });
+            res.write(JSON.stringify(needfulData));
         }
-    })
+        res.end();
+    } catch (error) {
+            res.writeHead(500, { "Content-type": "text/json" });
+            res.write(JSON.stringify({ message: "Server error" }));
+            res.end();
+    }
 }
 
 async function createPost(req, res) {
     try {
         const product = await getData(req, res);
         const productObj = JSON.parse(product);
-        if (onlyOne) {
-            countId = products[products.length - 1].id;
-            onlyOne = false
-        }
-        countId++;
-        const newProduct = {
-            id: String(countId),
-            name: productObj.name,
-            description: productObj.description,
-            price: productObj.price
-        }
-        products.push(newProduct);
-        writeToFile(products, "Product has been saved");
-        
+        savedProduct = await writeToFile(productObj)
+        res.writeHead(200, {'Content-type': 'text/json'})
+        res.write(JSON.stringify({
+            message: "Product has been saved",
+            product: savedProduct
+        }))
+        res.end()
     } catch (error) {
+        console.log(error);
         res.writeHead(400, { "Content-type": 'text/json' });
         res.write(JSON.stringify({ message: "Bad request" }));
         res.end();
@@ -65,22 +57,22 @@ async function createPost(req, res) {
 }
 
 async function deleteElement(req, res, id) {
-    let productForDelete = products.find((value) => value.id == id);
-    if (!productForDelete) {
-        res.writeHead(400, { "Content-type": "text/json" });
-        res.write(JSON.stringify({ massege: "Bad request" }))
-        res.end();
-    } else {
-        let ready = products.filter((value) => value.id !== productForDelete.id);
-
-        fs.writeFile('../data/data.json', JSON.stringify(ready, null, 4), 'utf8', function (err) {
-            if (err) console.log(err);
-            else {
-                res.writeHead(200, { "Content-type": "text/json" });
-                res.write(JSON.stringify({ massege: "product have been deleted" }))
-                res.end();
-            }
-        })
+    try {
+        let productForDelete = await getElementById(id);
+        if (!productForDelete) {
+            res.writeHead(400, { "Content-type": "text/json" });
+            res.write(JSON.stringify({ massege: "Bad request" }))
+            res.end();
+        }
+        else {
+            await deleteById(id)
+            res.writeHead(200, { "Content-type": "text/json" });
+            res.write(JSON.stringify({ massege: "product have been deleted" }))
+            res.end();
+        }
+        
+    } catch (error) {
+        console.log(error);
     }
 }
 
@@ -137,5 +129,4 @@ module.exports = {
     createPost,
     deleteElement,
     updateProduct
-
 }

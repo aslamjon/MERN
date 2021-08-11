@@ -17,18 +17,7 @@ function getData(req, res) {
     return promise;
 }
 
-function writeToFile(data, textToMessage) {
-    fs.writeFile(__dirname+'/../data/data.json', JSON.stringify(data, null, 4), 'utf8', function (err) {
-        if (err) console.log(err);
-        else {
-            res.writeHead(200, { "Content-type": 'text/json' });
-            res.write(JSON.stringify({ message: textToMessage }));
-            res.end();
-        }
-    })
-}
 
 module.exports = {
-    getData,
-    writeToFile
+    getData
 }
