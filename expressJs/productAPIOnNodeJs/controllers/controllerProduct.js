@@ -1,15 +1,21 @@
-const uuid = require('uuid')
-const { getProducts, getElementById } = require('../models/modelProduct');
-const { writeData } = require('../utils/utils');
 
-function getAllProducts(req, res) {
-    res.send(getProducts())
+const { getProducts, getElementById, create, update, deleteElem } = require('../models/modelProduct');
+
+
+async function getAllProducts(req, res) {
+    try {
+        const products = await getProducts()
+        res.send(products)
+    } catch(error) {
+
+    }
 }
 // get Product By Id
-function getProductById(req, res, id) {
-    const product = getElementById(id)
+async function getProductById(req, res) {
+    const {id} = req.params;
+    const product = await getElementById(id)
     if (!product) {
-        res.send({
+        res.status(404).send({
             message: "Product not found"
         })
     } else {
@@ -18,50 +24,56 @@ function getProductById(req, res, id) {
 }
 
 // create product
-function createProduct(req, res) {
+async function createProduct(req, res) {
     const {name, description, price} = req.body;
-    const products = getProducts();
     const product = {
-        id: uuid.v4(),
-        name, // name: name
+        name,
         description,
         price
     }
-    
-    products.push(product);
-    writeData(res, products, "Product has been createed", "Error")
+    try {
+        const newProduct = await create(product)
+        res.send(newProduct)
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 // update
-function updateProduct(req, res, id) {
+async function updateProduct(req, res) {
+    const {id} = req.params
     const {name, description, price} = req.body;
-    const products = getProducts()
-    const product = products.find(p => p.id === id)
-
-    if (!product) {
-        res.send({
-            message: 'Product not found'
-        })
-    } else {
-        const newProduct = {
-            name: name || product.name, 
-            description: description || product.description,
-            price: price || product.price
+    try {
+        const product = await getElementById(id)
+        if (!product) {
+            res.status(404).send({
+                message: "Produc not found"
+            })
+        } else {
+            const productData = {
+                name: name || product.name,
+                description: description || product.description,
+                price: price || product.price,
+            }
+            const updatedProduct = await update(id, productData)
+            res.send({
+                message: "Product updated successfuly"
+            })
         }
-
-        const index = products.findIndex(p => p.id === id)
-        products[index] = {
-            id: id,
-            ...newProduct
-        }
-        writeData(res, products, 'Product has been updated', "Error")
+    } catch (error) {
+        console.log(error);
     }
 }
 
 // delete
-function deleteProduct(req, res, id) {
-    const delProduct = getProducts().filter(p => p.id !== id)
-    writeData(res, delProduct, "Product has been deleted", "Error")
+async function deleteProduct(req, res) {
+    const {id} = req.params;
+    const product = await getElementById(id)
+    if (!product) res.status(404).send({ message: "Product not found" })
+    else {
+        const deleteP = await deleteElem(id)
+        res.send({ message: "Product has been deleted" })
+    }
 }
 module.exports = {
     getAllProducts,
