@@ -7,6 +7,15 @@ const StyledButton = styled.button`
   padding: 11px 14px;
   border: none;
   color: #000;
+
+  ${({ h }) => h && css`
+    height: ${h}px;
+  `};
+
+  ${({ w }) => w && css`
+    width: ${w}px;
+  `};
+
   ${({ danger }) => danger && css`
     background-color: #DF4545;
   `};

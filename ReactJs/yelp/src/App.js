@@ -3,13 +3,29 @@ import Button from './components/button/Button'
 import Sidebar from './components/sidebar'
 import Wrapper from './components/wrapper/Wrapper'
 
-export default class App extends Component {
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectCardSections } from './redux/card/card.selector';
+import Container from './components/container';
+
+
+
+class App extends Component {
   render() {
+    const {sections} = this.props; 
     return (
-      <Wrapper>
-        <Sidebar bgColor={"#000"}>Sidebar</Sidebar>
-        <Button circle outlined={"#ff0"}>hey</Button>
-      </Wrapper >
+      <Container px={10}>
+        <Wrapper flex>
+          <Sidebar />
+          <Button circle outlined={"#ff0"}>hey</Button>
+        </Wrapper >
+      </Container>
     )
   }
 }
+
+const mapsStateToProps = createStructuredSelector({
+  sections: selectCardSections
+})
+
+export default connect(mapsStateToProps)(App);
