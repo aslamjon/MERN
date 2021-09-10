@@ -22,6 +22,8 @@ const FullNameStyle = styled.div`
   line-height: 16px;
   margin-top: 13px;
   color: #000000;
+  display: flex;
+  justify-content: center;
 `;
 
 

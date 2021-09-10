@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCardSections } from './redux/card/card.selector';
 import Container from './components/container';
+import Main from './components/main/Main';
 
 
 
@@ -17,7 +18,8 @@ class App extends Component {
       <Container px={10}>
         <Wrapper flex>
           <Sidebar />
-          <Button circle outlined={"#ff0"}>hey</Button>
+          
+          <Main />
         </Wrapper >
       </Container>
     )

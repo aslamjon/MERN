@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styled, {createGlobalStyle, ThemeProvider} from 'styled-components';
+import {createGlobalStyle, ThemeProvider} from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -19,7 +19,7 @@ export default class Theme extends Component {
 
     render() {
         const {children} = this.props;
-        return <ThemeProvider theme={{dark: true, color: 'green'}}><GlobalStyle/>{children}</ThemeProvider>
+        return <ThemeProvider theme={{dark: true, color: '#fff'}}><GlobalStyle/>{children}</ThemeProvider>
     }
 }
 
