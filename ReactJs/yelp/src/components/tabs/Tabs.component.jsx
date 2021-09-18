@@ -32,7 +32,6 @@ const TabsItemsStyle = styled.div`
 `;
 
 class Tabs extends Component {
-
     clickHendling = (setTabId) => {
         const {setCurrentTab} = this.props;
         setCurrentTab(setTabId);
@@ -63,6 +62,13 @@ class Tabs extends Component {
                 </TabsItemsStyle>
             </div>
         )
+    }
+    componentDidMount() {
+        const {getTabs} = this.props;
+        fetch('http://192.168.1.125:3001/api/data')
+        .then(res => res.json()).then(res => console.log("RES",res))
+        
+        console.log(getTabs);
     }
 }
 const mapStateToProps = createStructuredSelector({
